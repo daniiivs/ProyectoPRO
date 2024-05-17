@@ -1,7 +1,5 @@
 package UI;
 
-import Model.Speciality;
-
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
-import java.util.ArrayList;
 
 public class WelcomeFrame extends JFrame {
 	private JPanel cardPanel;
@@ -70,4 +67,9 @@ public class WelcomeFrame extends JFrame {
 
 		this.setVisible(true);
 	}
+
+	public static void main(String[] args) {
+		new WelcomeFrame();
+	}
 }
+

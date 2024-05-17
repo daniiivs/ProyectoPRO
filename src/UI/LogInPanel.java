@@ -6,9 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LogInPanel extends JPanel {
-
-	private static final long serialVersionUID = 1L;
-
 	JButton btnNewButton = new JButton("Back");
 
 	public LogInPanel() {
