@@ -21,6 +21,20 @@ public class Database {
         }
     }
 
+    public String selectPassword(String dni) {
+        try {
+            PreparedStatement getPassword = this.connection.prepareStatement("SELECT passwd FROM medico WHERE dni LIKE ?");
+            getPassword.setString(1, dni);
+            ResultSet result = getPassword.executeQuery();
+            while (result.next()) {
+                return result.getString("passwd");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
     public void insertDoctor(Doctors doctor){
         try {
             PreparedStatement insertDoctor = this.connection.prepareStatement("INSERT INTO medico VALUES (?, ?, ?, ?, ?, ?)");
@@ -47,8 +61,19 @@ public class Database {
 
     public ResultSet selectDoctors() {
         try {
-            Statement getSpecialities = this.connection.createStatement();
-            return getSpecialities.executeQuery("SELECT * FROM medico");
+            Statement getDoctors = this.connection.createStatement();
+            return getDoctors.executeQuery("SELECT * FROM medico");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ResultSet selectDoctorByDNI(String dni) {
+        try {
+            PreparedStatement getDoctor = this.connection.prepareStatement("SELECT medico.*, especialidad.nombre as nombreEspecialidad FROM medico " +
+                    "INNER JOIN especialidad ON medico.especialidad LIKE especialidad.codigo WHERE dni LIKE ?");
+            getDoctor.setString(1, dni);
+            return getDoctor.executeQuery();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
