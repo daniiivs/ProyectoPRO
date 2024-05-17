@@ -4,6 +4,7 @@ import Entities.Database;
 import Entities.Doctors;
 import Entities.Speciality;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class UtilityMethods {
         return null;
     }
 
-    public static ArrayList<Speciality> getSpecialityList(){
+    public static ArrayList<Speciality> getSpecialityList() {
         ResultSet results = database.selectSpecialities();
         ArrayList<Speciality> specialitiesList = new ArrayList<>();
         try {
@@ -47,11 +48,11 @@ public class UtilityMethods {
         }
     }
 
-    public static boolean DNIisRegistered(String dni) {
+    public static boolean dniIsRegistered(String dni) {
         ResultSet results = database.selectDoctors();
         try {
             while (results.next()) {
-                if (results.getString("dni").equals(dni)){
+                if (results.getString("dni").equals(dni)) {
                     return true;
                 }
             }
@@ -64,4 +65,23 @@ public class UtilityMethods {
     public static void addNewDoctor(String dni, String name, String password, String firstLastName, String secondLastName, Speciality speciality) {
         database.insertDoctor(new Doctors(dni, name, password, firstLastName, secondLastName, speciality));
     }
+
+    public static boolean passwordNotMatching(String password, String dni) {
+        String realPassword = database.selectPassword(dni);
+        return realPassword.equals(password);
+    }
+
+    public static void logIn(String dni) {
+        ResultSet result = database.selectDoctorByDNI(dni);
+        try {
+            while (result.next()) {
+                Speciality speciality = new Speciality(result.getString("especialidad"), result.getString("nombreEspecialidad"));
+                Doctors doctors = new Doctors(result.getString("dni"), result.getString("nombre"), result.getString("passwd"), result.getString("apellido1"), result.getString("apellido2"), speciality);
+                System.out.println(doctors.toString());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+

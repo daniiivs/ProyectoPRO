@@ -50,7 +50,7 @@ public class SignUpPanel extends JPanel {
                     JOptionPane.showMessageDialog(null, "Passwords don't match", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (nameField.getText().isEmpty() || firstLastNameField.getText().isEmpty() || secondLastNameField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please type your personal information", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (UtilityMethods.DNIisRegistered(dniField.getText())) {
+                } else if (UtilityMethods.dniIsRegistered(dniField.getText())) {
                     dniField.setText("");
                     JOptionPane.showMessageDialog(null, "The DNI you typed is already registered. Please type a different one", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
