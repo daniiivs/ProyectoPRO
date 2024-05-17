@@ -1,8 +1,8 @@
 package UI;
 
-import Model.Database;
-import Model.Doctors;
-import Model.Speciality;
+import Entities.Database;
+import Entities.Doctors;
+import Entities.Speciality;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,8 +24,14 @@ public class UtilityMethods {
         return stringA.equals(stringB);
     }
 
-    public static String getSpecialityId(String specialityInfo) {
-        return specialityInfo.split("-")[0].trim();
+    public static Speciality getSpecialityId(String specialityInfo) {
+        String specialityId = specialityInfo.split("-")[0].trim();
+        for (Speciality speciality : getSpecialityList()) {
+            if (speciality.getId().equals(specialityId)) {
+                return speciality;
+            }
+        }
+        return null;
     }
 
     public static ArrayList<Speciality> getSpecialityList(){

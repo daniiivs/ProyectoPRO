@@ -1,12 +1,10 @@
 package UI;
 
-import Model.Speciality;
-import jdk.jshell.execution.Util;
+import Entities.Speciality;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 
 public class SignUpPanel extends JPanel {
     private JLabel dniLabel;
@@ -47,22 +45,42 @@ public class SignUpPanel extends JPanel {
                 } else if (String.valueOf(passwordField.getPassword()).isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please type a password", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (!UtilityMethods.checkMatch(String.valueOf(passwordField.getPassword()), String.valueOf(confirmPasswordField.getPassword()))) {
-                    JOptionPane.showMessageDialog(null, "Passwords don't match", "Error", JOptionPane.ERROR_MESSAGE);
                     passwordField.setText("");
                     confirmPasswordField.setText("");
+                    JOptionPane.showMessageDialog(null, "Passwords don't match", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (nameField.getText().isEmpty() || firstLastNameField.getText().isEmpty() || secondLastNameField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please type your personal information", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (UtilityMethods.DNIisRegistered(dniField.getText())) {
                     dniField.setText("");
                     JOptionPane.showMessageDialog(null, "The DNI you typed is already registered. Please type a different one", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    UtilityMethods.addNewDoctor(dniField.getText(), nameField.getText(), String.valueOf(passwordField.getPassword()), firstLastNameField.getText(), secondLastNameField.getText(), UtilityMethods.getSpecialityId(String.valueOf(specialityComboBox.getSelectedItem())));
+                    resetInputs();
+                    JOptionPane.showMessageDialog(null, "You've been registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
         add(signUpButton);
 
         backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetInputs();
+            }
+        });
         backButton.setBounds(375, 450, 89, 23);
         add(backButton);
+    }
+
+    private void resetInputs() {
+        dniField.setText("");
+        passwordField.setText("");
+        confirmPasswordField.setText("");
+        nameField.setText("");
+        firstLastNameField.setText("");
+        secondLastNameField.setText("");
+        specialityComboBox.setSelectedIndex(0);
     }
 
     private void editInputs() {
