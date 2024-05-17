@@ -1,4 +1,4 @@
-package Model;
+package Entities;
 
 public class Systems {
     private Integer id;

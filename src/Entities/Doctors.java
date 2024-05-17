@@ -1,4 +1,4 @@
-package Model;
+package Entities;
 
 public class Doctors extends Person {
     private String password;
