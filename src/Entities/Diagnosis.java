@@ -7,13 +7,33 @@ public class Diagnosis {
     private Doctors doctor;
     private Diseases disease;
     private LocalDate date;
-    private Boolean active;
+    private Boolean closed;
 
     public Diagnosis(Patients patient, Doctors doctor, Diseases disease) {
         this.patient = patient;
         this.doctor = doctor;
         this.disease = disease;
         this.date = LocalDate.now();
-        this.active = true;
+        this.closed = false;
+    }
+
+    public Patients getPatient() {
+        return patient;
+    }
+
+    public Doctors getDoctor() {
+        return doctor;
+    }
+
+    public Diseases getDisease() {
+        return disease;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public Boolean getClosed() {
+        return closed;
     }
 }
