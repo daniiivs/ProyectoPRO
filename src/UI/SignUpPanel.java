@@ -39,7 +39,7 @@ public class SignUpPanel extends JPanel {
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!UtilityMethods.checkDni(dniField.getText())) {
+                if (!UtilityMethods.checkDni(dniField.getText().toUpperCase())) {
                     dniField.setText("");
                     JOptionPane.showMessageDialog(null, "Please type a valid DNI", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (String.valueOf(passwordField.getPassword()).isEmpty()) {
@@ -50,11 +50,11 @@ public class SignUpPanel extends JPanel {
                     JOptionPane.showMessageDialog(null, "Passwords don't match", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (nameField.getText().isEmpty() || firstLastNameField.getText().isEmpty() || secondLastNameField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please type your personal information", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (UtilityMethods.dniIsRegistered(dniField.getText())) {
+                } else if (UtilityMethods.dniIsRegistered(dniField.getText().toUpperCase())) {
                     dniField.setText("");
                     JOptionPane.showMessageDialog(null, "The DNI you typed is already registered. Please type a different one", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    UtilityMethods.addNewDoctor(dniField.getText(), nameField.getText(), String.valueOf(passwordField.getPassword()), firstLastNameField.getText(), secondLastNameField.getText(), UtilityMethods.getSpecialityId(String.valueOf(specialityComboBox.getSelectedItem())));
+                    UtilityMethods.addNewDoctor(dniField.getText().toUpperCase(), nameField.getText().toUpperCase(), String.valueOf(passwordField.getPassword()), firstLastNameField.getText().toUpperCase(), secondLastNameField.getText().toUpperCase(), UtilityMethods.splitSpeciality(String.valueOf(specialityComboBox.getSelectedItem())));
                     resetInputs();
                     JOptionPane.showMessageDialog(null, "You've been registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
