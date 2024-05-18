@@ -10,11 +10,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
 
 public class WelcomeFrame extends JFrame {
+	public static WelcomeFrame welcomeFrame;
+
 	private JPanel cardPanel;
 	private WelcomePanel welcomePanel;
 	private LogInPanel logInPanel;
 	private SignUpPanel signUpPanel;
-	
+
 	//Identifiers
 	final static String WELCOMEPANEL = "Hospital";
 	final static String LOGINPANEL = "Log In";
@@ -34,6 +36,8 @@ public class WelcomeFrame extends JFrame {
 		cardPanel.add(signUpPanel, SIGNUPPANEL);
 
 		editCardButtons();
+
+		welcomeFrame = this;
 	}
 
 	private void editCardButtons() {
@@ -76,6 +80,10 @@ public class WelcomeFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(new Rectangle(1000, 600));
 		this.setVisible(true);
+	}
+
+	public void closeFrame(){
+		this.dispose();
 	}
 
 	public static void main(String[] args) {

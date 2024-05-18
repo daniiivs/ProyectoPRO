@@ -29,15 +29,14 @@ public class LogInPanel extends JPanel {
 		logInButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!UtilityMethods.dniIsRegistered(dniField.getText())) {
+				if (!UtilityMethods.dniIsRegistered(dniField.getText().toUpperCase())) {
 					dniField.setText("");
 					JOptionPane.showMessageDialog(null, "The DNI you typed is not registered", "Error", JOptionPane.ERROR_MESSAGE);
-				} else if (!UtilityMethods.passwordNotMatching(String.valueOf(passwordField.getPassword()), dniField.getText())) {
+				} else if (!UtilityMethods.passwordNotMatching(String.valueOf(passwordField.getPassword()), dniField.getText().toUpperCase())) {
 					passwordField.setText("");
 					JOptionPane.showMessageDialog(null, "Incorrect password. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					UtilityMethods.logIn(dniField.getText());
-					resetInputs();
+					UtilityMethods.logIn(dniField.getText().toUpperCase());
 				}
 			}
 		});
