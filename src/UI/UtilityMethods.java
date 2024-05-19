@@ -1,7 +1,12 @@
 package UI;
 
+<<<<<<< Updated upstream
 import Entities.*;
 import jdk.jshell.Diag;
+=======
+import DatabaseConnection.Database;
+import Entities.*;
+>>>>>>> Stashed changes
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -114,8 +119,13 @@ public class UtilityMethods {
         return realPassword.equals(password);
     }
 
+<<<<<<< Updated upstream
     public static ResultSet diagnosisInformation(Boolean condition) {
         return database.selectDiagnosis(condition);
+=======
+    public static ResultSet diagnosisInformation(Boolean condition, Doctors user) {
+        return database.selectDiagnosis(condition, user);
+>>>>>>> Stashed changes
     }
 
     public static ResultSet patientsInformation() {
@@ -175,5 +185,16 @@ public class UtilityMethods {
             throw new RuntimeException(e);
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    public static void closeDiagnosis(Doctors loggedUser, String dniPatient, String diseaseName, String date) {
+        database.updateCloseDiagnosis(dniPatient, loggedUser.getDni(), database.getDiseaseIdByName(diseaseName), date);
+    }
+
+    public static void deleteDiagnosis(Doctors loggedUser, String dniPatient, String diseaseName, String date) {
+        database.deleteClosedDiagnosis(dniPatient, loggedUser.getDni(), database.getDiseaseIdByName(diseaseName), date);
+    }
+>>>>>>> Stashed changes
 }
 
