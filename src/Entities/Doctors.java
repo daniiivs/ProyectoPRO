@@ -14,15 +14,7 @@ public class Doctors extends Person {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Speciality getSpeciality() {
         return speciality;
-    }
-
-    public void setSpeciality(Speciality speciality) {
-        this.speciality = speciality;
     }
 }
