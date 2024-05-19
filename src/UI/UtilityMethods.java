@@ -1,7 +1,7 @@
 package UI;
 
+import DatabaseConnection.Database;
 import Entities.*;
-import DatabaseConnector.Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

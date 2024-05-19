@@ -1,4 +1,4 @@
-package DatabaseConnector;
+package DatabaseConnection;
 
 import Entities.Diagnosis;
 import Entities.Doctors;
@@ -17,7 +17,7 @@ public class Database {
     private Connection connection;
 
     public Database() {
-        connectionFile = new File("src/DatabaseConnector/DatabaseInfo.txt");
+        connectionFile = new File("src/DatabaseConnection/DatabaseInfo.txt");
         this.ip = getInfoFromFile("ip", connectionFile);
         this.port = getInfoFromFile("port", connectionFile);
         this.database = getInfoFromFile("db", connectionFile);
@@ -167,7 +167,7 @@ public class Database {
             PreparedStatement getDisease = this.connection.prepareStatement("SELECT codigo FROM enfermedad WHERE nombre LIKE ?");
             getDisease.setString(1, diseaseName);
             ResultSet result = getDisease.executeQuery();
-            while (result.next()) {
+            while (result.next()){
                 return result.getInt("codigo");
             }
         } catch (SQLException e) {

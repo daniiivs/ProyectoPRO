@@ -5,13 +5,6 @@ import Entities.Diseases;
 import Entities.Doctors;
 import Entities.Patients;
 
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -23,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class LoggedInFrame extends JFrame {
     public static LoggedInFrame loggedInFrame;
+
     private Doctors loggedUser;
 
     private JTabbedPane contentPane;
@@ -35,7 +29,6 @@ public class LoggedInFrame extends JFrame {
 
     private JLabel nameLabel;
     private JLabel dniLabel;
-    private JLabel passwordLabel;
     private JLabel specialityLabel;
 
     private JLabel patientLabel;
@@ -56,9 +49,6 @@ public class LoggedInFrame extends JFrame {
     private JButton addDiagnosisButton;
     private JButton logOutButton;
 
-    String dniPatient;
-
-
     public LoggedInFrame(Doctors user) {
         this.loggedUser = user;
 
@@ -69,10 +59,6 @@ public class LoggedInFrame extends JFrame {
         editInputs();
         editButtons();
         addTabbedPanels();
-
-        JButton logOutButton = new JButton("Cerrar sesión");
-        logOutButton.setBounds(238, 232, 119, 23);
-        mainInfoPanel.add(logOutButton);
 
         loggedInFrame = this;
     }
