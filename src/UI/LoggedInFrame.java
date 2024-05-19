@@ -5,7 +5,6 @@ import Entities.Diseases;
 import Entities.Doctors;
 import Entities.Patients;
 
-<<<<<<< Updated upstream
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,20 +13,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class LoggedInFrame extends JFrame {
-=======
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-public class LoggedInFrame extends JFrame {
-    public static LoggedInFrame loggedInFrame;
-
->>>>>>> Stashed changes
     private Doctors loggedUser;
 
     private JTabbedPane contentPane;
@@ -40,10 +25,7 @@ public class LoggedInFrame extends JFrame {
 
     private JLabel nameLabel;
     private JLabel dniLabel;
-<<<<<<< Updated upstream
     private JLabel passwordLabel;
-=======
->>>>>>> Stashed changes
     private JLabel specialityLabel;
 
     private JLabel patientLabel;
@@ -56,19 +38,9 @@ public class LoggedInFrame extends JFrame {
     private JTable tableClosed;
     private JTable tablePatients;
 
-<<<<<<< Updated upstream
     private JButton addDiagnosisButton;
 
     String dniPatient;
-=======
-    private DefaultTableModel modelActive;
-    private DefaultTableModel modelClosed;
-
-    String[] columnsDiagnosis = {"DNI", "Paciente", "Enfermedad", "Teléfono", "Fecha"};
-
-    private JButton addDiagnosisButton;
-    private JButton logOutButton;
->>>>>>> Stashed changes
 
     public LoggedInFrame(Doctors user) {
         this.loggedUser = user;
@@ -81,13 +53,9 @@ public class LoggedInFrame extends JFrame {
         editButtons();
         addTabbedPanels();
 
-<<<<<<< Updated upstream
         JButton logOutButton = new JButton("Cerrar sesión");
         logOutButton.setBounds(238, 232, 119, 23);
         mainInfoPanel.add(logOutButton);
-=======
-        loggedInFrame = this;
->>>>>>> Stashed changes
     }
 
     private void editButtons() {
@@ -101,37 +69,10 @@ public class LoggedInFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "Ya existe un diagnóstico con los mismos datos", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     UtilityMethods.addNewDiagnosis(diagnosis);
-<<<<<<< Updated upstream
-=======
-                    updateTableModels();
-                    JOptionPane.showMessageDialog(null, "Se ha añadido el nuevo caso", "Success", JOptionPane.INFORMATION_MESSAGE);
->>>>>>> Stashed changes
                 }
             }
         });
         addDiagnosisPanel.add(addDiagnosisButton);
-<<<<<<< Updated upstream
-=======
-
-        logOutButton = new JButton("Cerrar sesión");
-        logOutButton.setBounds(238, 232, 119, 23);
-        logOutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (JOptionPane.showConfirmDialog(null, "¿Seguro que quieres salir?", "exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    loggedInFrame.dispose();
-                    loggedUser = null;
-                    new WelcomeFrame();
-                }
-            }
-        });
-        mainInfoPanel.add(logOutButton);
-    }
-
-    private void updateTableModels() {
-        modelActive.setDataVector(UtilityMethods.buildTable(UtilityMethods.diagnosisInformation(false, loggedUser)), columnsDiagnosis);
-        modelClosed.setDataVector(UtilityMethods.buildTable(UtilityMethods.diagnosisInformation(true, loggedUser)), columnsDiagnosis);
->>>>>>> Stashed changes
     }
 
     private void editInputs() {
@@ -165,21 +106,10 @@ public class LoggedInFrame extends JFrame {
     }
 
     private void editTablePatients() {
-<<<<<<< Updated upstream
         String[] columsPatient = {"DNI", "Nombre", "Primer apellido", "Segundo apellido", "Localidad", "Teléfono"};
         String[][] dataPatient = UtilityMethods.buildTable(UtilityMethods.patientsInformation());
 
         tablePatients = new JTable(dataPatient, columsPatient);
-=======
-        String[] columsPatient = {"DNI", "Primer apellido", "Segundo apellido", "Nombre", "Localidad", "Teléfono"};
-        String[][] dataPatient = UtilityMethods.buildTable(UtilityMethods.patientsInformation());
-
-        tablePatients = new JTable(dataPatient, columsPatient) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
->>>>>>> Stashed changes
         tablePatients.setBounds(10, 11, 945, 641);
 
         JScrollPane scrollTablePatients = new JScrollPane(tablePatients);
@@ -189,37 +119,9 @@ public class LoggedInFrame extends JFrame {
 
     private void editTableClosed() {
         String[] columnsDiagnosis = {"DNI", "Paciente", "Enfermedad", "Teléfono", "Fecha"};
-<<<<<<< Updated upstream
         String[][] dataClosed = UtilityMethods.buildTable(UtilityMethods.diagnosisInformation(true));
 
         tableClosed = new JTable(dataClosed, columnsDiagnosis);
-=======
-        String[][] dataClosed = UtilityMethods.buildTable(UtilityMethods.diagnosisInformation(true, loggedUser));
-
-        tableClosed = new JTable() {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        modelClosed = new DefaultTableModel();
-        modelClosed.setDataVector(dataClosed, columnsDiagnosis);
-        tableClosed.setModel(modelClosed);
-        tableClosed.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JTable clickedTable = (JTable) e.getSource();
-                    int row = clickedTable.getSelectedRow();
-                    if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar el caso seleccionado?", "option", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        String[] diagnosisInfo = getDiagnosisInfo(row, clickedTable);
-                        UtilityMethods.deleteDiagnosis(loggedUser, diagnosisInfo[0], diagnosisInfo[1], diagnosisInfo[2]);
-                        updateTableModels();
-                        JOptionPane.showMessageDialog(null, "El caso se ha eliminado", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                }
-            }
-        });
->>>>>>> Stashed changes
         tableClosed.setBounds(10, 11, 945, 641);
 
         JScrollPane scrollTableClosed = new JScrollPane(tableClosed);
@@ -229,37 +131,9 @@ public class LoggedInFrame extends JFrame {
 
     private void editTableActive() {
         String[] columnsDiagnosis = {"DNI", "Paciente", "Enfermedad", "Teléfono", "Fecha"};
-<<<<<<< Updated upstream
         String[][] dataActive = UtilityMethods.buildTable(UtilityMethods.diagnosisInformation(false));
 
         tableActive = new JTable(dataActive, columnsDiagnosis);
-=======
-        String[][] dataActive = UtilityMethods.buildTable(UtilityMethods.diagnosisInformation(false, loggedUser));
-
-        tableActive = new JTable() {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        modelActive = new DefaultTableModel();
-        modelActive.setDataVector(dataActive, columnsDiagnosis);
-        tableActive.setModel(modelActive);
-        tableActive.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    JTable clickedTable = (JTable) e.getSource();
-                    int row = clickedTable.getSelectedRow();
-                    if (JOptionPane.showConfirmDialog(null, "¿Desea dar el alta al caso seleccionado?", "option", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        String[] diagnosisInfo = getDiagnosisInfo(row, clickedTable);
-                        UtilityMethods.closeDiagnosis(loggedUser, diagnosisInfo[0], diagnosisInfo[1], diagnosisInfo[2]);
-                        updateTableModels();
-                        JOptionPane.showMessageDialog(null, "El caso se ha cerrado", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                }
-            }
-        });
->>>>>>> Stashed changes
         tableActive.setBounds(10, 11, 945, 641);
 
         JScrollPane scrollTableActive = new JScrollPane(tableActive);
@@ -267,7 +141,6 @@ public class LoggedInFrame extends JFrame {
         activeDiagnosisPanel.add(scrollTableActive);
     }
 
-<<<<<<< Updated upstream
     private void editLabels() {
         nameLabel = new JLabel("¡Buenos días, nombre!");
         nameLabel.setBounds(210, 65, 259, 14);
@@ -283,27 +156,6 @@ public class LoggedInFrame extends JFrame {
 
         specialityLabel = new JLabel("Especialidad:");
         specialityLabel.setBounds(210, 183, 97, 14);
-=======
-    private String[] getDiagnosisInfo(int row, JTable table) {
-        String[] diagnosisInfo = new String[3];
-        diagnosisInfo[0] = (String) table.getValueAt(row, 0);
-        diagnosisInfo[1] = (String) table.getValueAt(row, 2);
-        diagnosisInfo[2] = (String) table.getValueAt(row, 4);
-        return diagnosisInfo;
-    }
-
-    private void editLabels() {
-        nameLabel = new JLabel("¡Buenos días, " + loggedUser.getName() + " " + loggedUser.getFirstLastName() + " " + loggedUser.getSecondLastName() + "!");
-        nameLabel.setBounds(210, 65, 259, 14);
-        mainInfoPanel.add(nameLabel);
-
-        dniLabel = new JLabel("DNI: " + loggedUser.getDni());
-        dniLabel.setBounds(210, 133, 200, 14);
-        mainInfoPanel.add(dniLabel);
-
-        specialityLabel = new JLabel("Especialidad: " + loggedUser.getSpeciality().getName());
-        specialityLabel.setBounds(210, 183, 200, 14);
->>>>>>> Stashed changes
         mainInfoPanel.add(specialityLabel);
 
         patientLabel = new JLabel("Paciente:");
