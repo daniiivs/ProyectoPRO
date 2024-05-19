@@ -2,7 +2,8 @@ package UI;
 
 import Entities.*;
 import jdk.jshell.Diag;
-
+import Entities.Database;
+import Entities.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -114,8 +115,8 @@ public class UtilityMethods {
         return realPassword.equals(password);
     }
 
-    public static ResultSet diagnosisInformation(Boolean condition) {
-        return database.selectDiagnosis(condition);
+    public static ResultSet diagnosisInformation(Boolean condition, Doctors user) {
+        return database.selectDiagnosis(condition, user);
     }
 
     public static ResultSet patientsInformation() {
@@ -174,6 +175,14 @@ public class UtilityMethods {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void closeDiagnosis(Doctors loggedUser, String dniPatient, String diseaseName, String date) {
+        database.updateCloseDiagnosis(dniPatient, loggedUser.getDni(), database.getDiseaseIdByName(diseaseName), date);
+    }
+
+    public static void deleteDiagnosis(Doctors loggedUser, String dniPatient, String diseaseName, String date) {
+        database.deleteClosedDiagnosis(dniPatient, loggedUser.getDni(), database.getDiseaseIdByName(diseaseName), date);
     }
 }
 

@@ -21,11 +21,6 @@ public class Database {
         }
     }
 
-<<<<<<< Updated upstream:src/Entities/Database.java
-=======
-<<<<<<< Updated upstream:src/Model/Database.java
-=======
->>>>>>> Stashed changes:src/Model/Database.java
     public String selectPassword(String dni) {
         try {
             PreparedStatement getPassword = this.connection.prepareStatement("SELECT passwd FROM medico WHERE dni LIKE ?");
@@ -39,9 +34,6 @@ public class Database {
         }
         return null;
     }
-
-<<<<<<< Updated upstream:src/Entities/Database.java
-=======
 
     public void insertDiagnosis(Diagnosis diagnosis) {
         try {
@@ -57,8 +49,6 @@ public class Database {
         }
     }
 
->>>>>>> Stashed changes:src/Entities/Database.java
->>>>>>> Stashed changes:src/Model/Database.java
     public void insertDoctor(Doctors doctor){
         try {
             PreparedStatement insertDoctor = this.connection.prepareStatement("INSERT INTO medico VALUES (?, ?, ?, ?, ?, ?)");
@@ -85,14 +75,6 @@ public class Database {
 
     public ResultSet selectPatients() {
         try {
-<<<<<<< Updated upstream:src/Entities/Database.java
-            Statement getDoctors = this.connection.createStatement();
-            return getDoctors.executeQuery("SELECT * FROM medico");
-=======
-<<<<<<< Updated upstream:src/Model/Database.java
-            Statement getSpecialities = this.connection.createStatement();
-            return getSpecialities.executeQuery("SELECT * FROM medico");
-=======
             Statement getPatients = this.connection.createStatement();
             return getPatients.executeQuery("SELECT dni, apellido1, apellido2, nombre, localidad, telefono FROM paciente ORDER BY apellido1, apellido2, nombre");
         } catch (SQLException e) {
@@ -118,7 +100,6 @@ public class Database {
             getDoctor.setInt(3, diagnosis.getDisease().getId());
             getDoctor.setDate(4, Date.valueOf(diagnosis.getDate()));
             return getDoctor.executeQuery();
->>>>>>> Stashed changes:src/Model/Database.java
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -130,22 +111,61 @@ public class Database {
                     "INNER JOIN especialidad ON medico.especialidad LIKE especialidad.codigo WHERE dni LIKE ?");
             getDoctor.setString(1, dni);
             return getDoctor.executeQuery();
-<<<<<<< Updated upstream:src/Entities/Database.java
-=======
->>>>>>> Stashed changes:src/Entities/Database.java
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public ResultSet selectDiagnosis(Boolean condition) {
+    public ResultSet selectDiagnosis(Boolean condition, Doctors user) {
         try {
             PreparedStatement getDiagnosis = this.connection.prepareStatement("SELECT diagnostico.dni_paciente, concat(paciente.apellido1, ' ', paciente.apellido2, ', ', paciente.nombre) " +
                     "as paciente, enfermedad.nombre, paciente.telefono, diagnostico.fecha_diagnostico as enfermedad FROM diagnostico INNER JOIN paciente ON diagnostico.dni_paciente LIKE " +
-                    "paciente.dni INNER JOIN enfermedad on diagnostico.codigo_enfermedad LIKE enfermedad.codigo WHERE alta LIKE ?");
+                    "paciente.dni INNER JOIN enfermedad on diagnostico.codigo_enfermedad LIKE enfermedad.codigo WHERE alta LIKE ? AND diagnostico.dni_medico LIKE ?");
             getDiagnosis.setBoolean(1, condition);
+            getDiagnosis.setString(2, user.getDni());
             return getDiagnosis.executeQuery();
->>>>>>> Stashed changes:src/Model/Database.java
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Integer getDiseaseIdByName(String diseaseName) {
+        try {
+            PreparedStatement getDisease = this.connection.prepareStatement("SELECT codigo FROM enfermedad WHERE nombre LIKE ?");
+            getDisease.setString(1, diseaseName);
+            ResultSet result = getDisease.executeQuery();
+            while (result.next()){
+                return result.getInt("codigo");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public void updateCloseDiagnosis(String dniPatient, String dniDoctor, int diseaseId, String date) {
+        try {
+            PreparedStatement updateCloseDiagnosis = this.connection.prepareStatement("UPDATE diagnostico SET alta = true WHERE dni_paciente LIKE ? AND " +
+                    "dni_medico LIKE ? AND codigo_enfermedad LIKE ? AND fecha_diagnostico LIKE ?");
+            updateCloseDiagnosis.setString(1, dniPatient);
+            updateCloseDiagnosis.setString(2, dniDoctor);
+            updateCloseDiagnosis.setInt(3, diseaseId);
+            updateCloseDiagnosis.setString(4, date);
+            updateCloseDiagnosis.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteClosedDiagnosis(String dniPatient, String dniDoctor, int diseaseId, String date) {
+        try {
+            PreparedStatement deleteClosedDiagnosis = this.connection.prepareStatement("DELETE FROM diagnostico WHERE dni_paciente LIKE ? AND " +
+                    "dni_medico LIKE ? AND codigo_enfermedad LIKE ? AND fecha_diagnostico LIKE ?");
+            deleteClosedDiagnosis.setString(1, dniPatient);
+            deleteClosedDiagnosis.setString(2, dniDoctor);
+            deleteClosedDiagnosis.setInt(3, diseaseId);
+            deleteClosedDiagnosis.setString(4, date);
+            deleteClosedDiagnosis.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
