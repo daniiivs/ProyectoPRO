@@ -1,9 +1,8 @@
 package UI;
 
 import Entities.*;
-import jdk.jshell.Diag;
-import Entities.Database;
-import Entities.*;
+import DatabaseConnector.Database;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

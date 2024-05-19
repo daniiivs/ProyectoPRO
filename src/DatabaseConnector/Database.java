@@ -1,24 +1,57 @@
-package Entities;
+package DatabaseConnector;
 
+import Entities.Diagnosis;
+import Entities.Doctors;
+
+import java.io.*;
 import java.sql.*;
 
 public class Database {
-    private String ip = "localhost";
-    private String port = "3306";
-    private String database = "hospitalPRO";
-    private String usuario = "root";
-    private String password = "";
+    private File connectionFile;
+
+    private String ip;
+    private String port;
+    private String database;
+    private String user;
+    private String password;
     private Connection connection;
 
-    public Database () {
+    public Database() {
+        connectionFile = new File("src/DatabaseConnector/DatabaseInfo.txt");
+        this.ip = getInfoFromFile("ip", connectionFile);
+        this.port = getInfoFromFile("port", connectionFile);
+        this.database = getInfoFromFile("db", connectionFile);
+        this.user = getInfoFromFile("user", connectionFile);
+        this.password = getInfoFromFile("password", connectionFile);
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + database, usuario, password);
+            this.connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + database, user, password);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String getInfoFromFile(String field, File file) {
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            while ((line = br.readLine()) != null) {
+                if (field.equals(line.split("\\$")[0])) {
+                    if (line.split("\\$")[1].equals("none")) {
+                        return "";
+                    }
+                    return line.split("\\$")[1];
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return "";
     }
 
     public String selectPassword(String dni) {
@@ -49,7 +82,7 @@ public class Database {
         }
     }
 
-    public void insertDoctor(Doctors doctor){
+    public void insertDoctor(Doctors doctor) {
         try {
             PreparedStatement insertDoctor = this.connection.prepareStatement("INSERT INTO medico VALUES (?, ?, ?, ?, ?, ?)");
             insertDoctor.setString(1, doctor.getDni());
@@ -91,7 +124,7 @@ public class Database {
         }
     }
 
-    public ResultSet selectDiagnosisByPrimaryKey(Diagnosis diagnosis){
+    public ResultSet selectDiagnosisByPrimaryKey(Diagnosis diagnosis) {
         try {
             PreparedStatement getDoctor = this.connection.prepareStatement("SELECT * from diagnostico WHERE dni_paciente LIKE ? AND " +
                     "dni_medico LIKE ? AND codigo_enfermedad LIKE ? AND fecha_diagnostico LIKE ?");
@@ -134,7 +167,7 @@ public class Database {
             PreparedStatement getDisease = this.connection.prepareStatement("SELECT codigo FROM enfermedad WHERE nombre LIKE ?");
             getDisease.setString(1, diseaseName);
             ResultSet result = getDisease.executeQuery();
-            while (result.next()){
+            while (result.next()) {
                 return result.getInt("codigo");
             }
         } catch (SQLException e) {
