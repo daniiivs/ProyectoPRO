@@ -14,7 +14,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class LoggedInFrame extends JFrame {
+public class LoggedInFrame extends JFrame implements HospitalUI {
     public static LoggedInFrame loggedInFrame;
 
     private Doctors loggedUser;
@@ -65,7 +65,8 @@ public class LoggedInFrame extends JFrame {
 
     private void editButtons() {
         addDiagnosisButton = new JButton("Registrar Caso");
-        addDiagnosisButton.setBounds(119, 200, 120, 23);
+        addDiagnosisButton.setBounds(600 - 100, 300, 200, 40);
+        addDiagnosisButton.setFont(buttonFont);
         addDiagnosisButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,7 +83,8 @@ public class LoggedInFrame extends JFrame {
         addDiagnosisPanel.add(addDiagnosisButton);
 
         logOutButton = new JButton("Cerrar sesión");
-        logOutButton.setBounds(238, 232, 119, 23);
+        logOutButton.setBounds(600 - 75, 550, 150, 40);
+        logOutButton.setFont(buttonFont);
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,14 +108,16 @@ public class LoggedInFrame extends JFrame {
         for (Patients patient : UtilityMethods.getPatientsList()) {
             patientComboBox.addItem(patient.getFirstLastName() + " " + patient.getSecondLastName() + ", " + patient.getName() + " - " + patient.getDni());
         }
-        patientComboBox.setBounds(316, 50, 300, 20);
+        patientComboBox.setBounds(500, 150, 450, 40);
+        patientComboBox.setFont(addPatientFont);
         addDiagnosisPanel.add(patientComboBox);
 
         diseaseComboBox = new JComboBox();
         for (Diseases disease : UtilityMethods.getDiseaseList()) {
             diseaseComboBox.addItem(disease.getName() + " - " + disease.getId());
         }
-        diseaseComboBox.setBounds(316, 100, 300, 20);
+        diseaseComboBox.setBounds(500, 200, 450, 40);
+        diseaseComboBox.setFont(addPatientFont);
         addDiagnosisPanel.add(diseaseComboBox);
     }
 
@@ -123,6 +127,7 @@ public class LoggedInFrame extends JFrame {
         contentPane.addTab("Mis altas", null, closedDiagnosisPanel, null);
         contentPane.addTab("Añadir caso", null, addDiagnosisPanel, null);
         contentPane.addTab("Todos los pacientes", null, allPatientsPanel, null);
+        contentPane.setFont(tabFont);
     }
 
     private void editTables() {
@@ -140,11 +145,14 @@ public class LoggedInFrame extends JFrame {
                 return false;
             }
         };
-        tablePatients.setBounds(10, 11, 945, 641);
+        tablePatients.getTableHeader().setReorderingAllowed(false);
+        tablePatients.setRowHeight(25);
+        tablePatients.getTableHeader().setFont(tableHeaderFont);
+        tablePatients.setFont(tableFont);
 
         JScrollPane scrollTablePatients = new JScrollPane(tablePatients);
-        scrollTablePatients.setBounds(10, 11, 945, 641);
-        allPatientsPanel.add(scrollTablePatients);
+        scrollTablePatients.setBounds(5, 10, this.getWidth() - 40, this.getHeight() - 105);
+        allPatientsPanel.add(scrollTablePatients, CENTER_ALIGNMENT);
     }
 
     private void editTableClosed() {
@@ -174,10 +182,13 @@ public class LoggedInFrame extends JFrame {
                 }
             }
         });
-        tableClosed.setBounds(10, 11, 945, 641);
+        tableClosed.getTableHeader().setReorderingAllowed(false);
+        tableClosed.setRowHeight(25);
+        tableClosed.getTableHeader().setFont(tableHeaderFont);
+        tableClosed.setFont(tableFont);
 
         JScrollPane scrollTableClosed = new JScrollPane(tableClosed);
-        scrollTableClosed.setBounds(10, 11, 945, 641);
+        scrollTableClosed.setBounds(5, 10, this.getWidth() - 40, this.getHeight() - 105);
         closedDiagnosisPanel.add(scrollTableClosed);
     }
 
@@ -208,11 +219,14 @@ public class LoggedInFrame extends JFrame {
                 }
             }
         });
-        tableActive.setBounds(10, 11, 945, 641);
+        tableActive.getTableHeader().setReorderingAllowed(false);
+        tableActive.setRowHeight(25);
+        tableActive.getTableHeader().setFont(tableHeaderFont);
+        tableActive.setFont(tableFont);
 
         JScrollPane scrollTableActive = new JScrollPane(tableActive);
-        scrollTableActive.setBounds(10, 11, 945, 641);
-        activeDiagnosisPanel.add(scrollTableActive);
+        scrollTableActive.setBounds(5, 10, this.getWidth() - 40, this.getHeight() - 105);
+        activeDiagnosisPanel.add(scrollTableActive, CENTER_ALIGNMENT);
     }
 
     private String[] getDiagnosisInfo(int row, JTable table) {
@@ -224,24 +238,29 @@ public class LoggedInFrame extends JFrame {
     }
 
     private void editLabels() {
-        nameLabel = new JLabel("¡Buenos días, " + loggedUser.getName() + " " + loggedUser.getFirstLastName() + " " + loggedUser.getSecondLastName() + "!");
-        nameLabel.setBounds(210, 65, 259, 14);
+        nameLabel = new JLabel(loggedUser.getName() + " " + loggedUser.getFirstLastName() + " " + loggedUser.getSecondLastName());
+        nameLabel.setBounds(100, 50, 1200, 70);
+        nameLabel.setFont(nameFont);
         mainInfoPanel.add(nameLabel);
 
         dniLabel = new JLabel("DNI: " + loggedUser.getDni());
-        dniLabel.setBounds(210, 133, 200, 14);
+        dniLabel.setBounds(100, 150, 600, 50);
+        dniLabel.setFont(informationFont);
         mainInfoPanel.add(dniLabel);
 
         specialityLabel = new JLabel("Especialidad: " + loggedUser.getSpeciality().getName());
-        specialityLabel.setBounds(210, 183, 200, 14);
+        specialityLabel.setBounds(100, 200, 600, 50);
+        specialityLabel.setFont(informationFont);
         mainInfoPanel.add(specialityLabel);
 
         patientLabel = new JLabel("Paciente:");
-        patientLabel.setBounds(145, 50, 161, 20);
+        patientLabel.setBounds(300, 150, 300, 40);
+        patientLabel.setFont(addPatientFont);
         addDiagnosisPanel.add(patientLabel);
 
         diseaseLabel = new JLabel("Enfermedad:");
-        diseaseLabel.setBounds(145, 100, 161, 20);
+        diseaseLabel.setBounds(300, 200, 300, 40);
+        diseaseLabel.setFont(addPatientFont);
         addDiagnosisPanel.add(diseaseLabel);
     }
 
@@ -268,7 +287,9 @@ public class LoggedInFrame extends JFrame {
 
     private void editFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 996, 740);
+        setBounds(100, 100, 1200, 800);
+        setResizable(false);
+        setLocationRelativeTo(null);
         this.setVisible(true);
     }
 }

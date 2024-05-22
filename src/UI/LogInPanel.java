@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LogInPanel extends JPanel {
+public class LogInPanel extends JPanel implements HospitalUI {
 	private JLabel dniLabel;
 	private JLabel passwordLabel;
 
@@ -25,8 +25,9 @@ public class LogInPanel extends JPanel {
 	}
 
 	private void editButtons() {
-		logInButton = new JButton("Log In");
-		logInButton.setBounds(119, 200, 89, 23);
+		logInButton = new JButton("Iniciar sesión");
+		logInButton.setBounds((welcomeFrameWidth / 2 - 75) - 85, 300, 150, 40);
+		logInButton.setFont(buttonFont);
 		logInButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -43,8 +44,9 @@ public class LogInPanel extends JPanel {
 		});
 		add(logInButton);
 
-		backButton = new JButton("Back");
-		backButton.setBounds(375, 200, 89, 23);
+		backButton = new JButton("Atrás");
+		backButton.setBounds((welcomeFrameWidth / 2 - 75) + 85, 300, 150, 40);
+		backButton.setFont(buttonFont);
 		backButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -61,22 +63,25 @@ public class LogInPanel extends JPanel {
 
 	private void editInputs() {
 		dniField = new JTextField();
-		dniField.setBounds(316, 50, 200, 20);
+		dniField.setBounds(300, 150, 250, 30);
+		dniField.setFont(labelInputFont);
 		add(dniField);
-		dniField.setColumns(10);
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(316, 100, 200, 20);
+		passwordField.setBounds(300, 200, 250, 30);
+		passwordField.setFont(labelInputFont);
 		add(passwordField);
 	}
 
 	private void editLabels() {
 		dniLabel = new JLabel("DNI:");
-		dniLabel.setBounds(145, 50, 161, 20);
+		dniLabel.setBounds(160, 150, 200, 30);
+		dniLabel.setFont(labelInputFont);
 		add(dniLabel);
 
-		passwordLabel = new JLabel("Password:");
-		passwordLabel.setBounds(145, 100, 161, 20);
+		passwordLabel = new JLabel("Contraseña:");
+		passwordLabel.setBounds(160, 200, 200, 30);
+		passwordLabel.setFont(labelInputFont);
 		add(passwordLabel);
 	}
 }

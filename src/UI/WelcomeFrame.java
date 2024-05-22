@@ -78,6 +78,7 @@ public class WelcomeFrame extends JFrame implements HospitalUI {
 	private void editFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(new Rectangle(welcomeFrameWidth, welcomeFrameHeight));
+		setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.setResizable(false);
 	}

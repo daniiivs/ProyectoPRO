@@ -87,36 +87,36 @@ public class SignUpPanel extends JPanel implements HospitalUI {
 
     private void editInputs() {
         dniField = new JTextField();
-        dniField.setBounds(330, 50, 200, 30);
+        dniField.setBounds(330, 50, 250, 30);
         add(dniField);
         dniField.setFont(labelInputFont);
         dniField.setColumns(10);
 
         passwordField = new JPasswordField();
-        passwordField.setBounds(330, 100, 200, 30);
+        passwordField.setBounds(330, 100, 250, 30);
         passwordField.setFont(labelInputFont);
         add(passwordField);
 
         confirmPasswordField = new JPasswordField();
-        confirmPasswordField.setBounds(330, 150, 200, 30);
+        confirmPasswordField.setBounds(330, 150, 250, 30);
         confirmPasswordField.setFont(labelInputFont);
         add(confirmPasswordField);
 
         nameField = new JTextField();
         nameField.setColumns(10);
-        nameField.setBounds(330, 200, 200, 30);
+        nameField.setBounds(330, 200, 250, 30);
         nameField.setFont(labelInputFont);
         add(nameField);
 
         firstLastNameField = new JTextField();
         firstLastNameField.setColumns(10);
-        firstLastNameField.setBounds(330, 250, 200, 30);
+        firstLastNameField.setBounds(330, 250, 250, 30);
         firstLastNameField.setFont(labelInputFont);
         add(firstLastNameField);
 
         secondLastNameField = new JTextField();
         secondLastNameField.setColumns(10);
-        secondLastNameField.setBounds(330, 300, 200, 30);
+        secondLastNameField.setBounds(330, 300, 250, 30);
         secondLastNameField.setFont(labelInputFont);
         add(secondLastNameField);
 
@@ -124,44 +124,44 @@ public class SignUpPanel extends JPanel implements HospitalUI {
         for (Speciality speciality : UtilityMethods.getSpecialityList()) {
             specialityComboBox.addItem(speciality.getId() + " - " + speciality.getName());
         }
-        specialityComboBox.setBounds(330, 350, 200, 30);
+        specialityComboBox.setBounds(330, 350, 250, 30);
         specialityComboBox.setFont(labelInputFont);
         add(specialityComboBox);
     }
 
     private void editLabels() {
         dniLabel = new JLabel("DNI:");
-        dniLabel.setBounds(150, 50, 150, 30);
+        dniLabel.setBounds(110, 50, 200, 30);
         dniLabel.setFont(labelInputFont);
         add(dniLabel);
 
         passwordLabel = new JLabel("Contraseña:");
-        passwordLabel.setBounds(150, 100, 150, 30);
+        passwordLabel.setBounds(110, 100, 200, 30);
         passwordLabel.setFont(labelInputFont);
         add(passwordLabel);
 
         confirmPasswordLabel = new JLabel("Confirmar contraseña:");
-        confirmPasswordLabel.setBounds(150, 150, 150, 30);
+        confirmPasswordLabel.setBounds(110, 150, 200, 30);
         confirmPasswordLabel.setFont(labelInputFont);
         add(confirmPasswordLabel);
 
         nameLabel = new JLabel("Nombre:");
-        nameLabel.setBounds(150, 200, 150, 30);
+        nameLabel.setBounds(110, 200, 200, 30);
         nameLabel.setFont(labelInputFont);
         add(nameLabel);
 
         firstLastNameLabel = new JLabel("Primer apellido:");
-        firstLastNameLabel.setBounds(150, 250, 150, 30);
+        firstLastNameLabel.setBounds(110, 250, 200, 30);
         firstLastNameLabel.setFont(labelInputFont);
         add(firstLastNameLabel);
 
         secondLastNameLabel = new JLabel("Segundo apellido:");
-        secondLastNameLabel.setBounds(150, 300, 150, 30);
+        secondLastNameLabel.setBounds(110, 300, 200, 30);
         secondLastNameLabel.setFont(labelInputFont);
         add(secondLastNameLabel);
 
         specialityLabel = new JLabel("Especialidad:");
-        specialityLabel.setBounds(150, 350, 150, 30);
+        specialityLabel.setBounds(110, 350, 200, 30);
         specialityLabel.setFont(labelInputFont);
         add(specialityLabel);
     }
