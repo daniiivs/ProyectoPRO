@@ -108,7 +108,7 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
         for (Patients patient : UtilityMethods.getPatientsList()) {
             patientComboBox.addItem(patient.getFirstLastName() + " " + patient.getSecondLastName() + ", " + patient.getName() + " - " + patient.getDni());
         }
-        patientComboBox.setBounds(500, 150, 450, 40);
+        patientComboBox.setBounds(450, 125, 500, 40);
         patientComboBox.setFont(addPatientFont);
         addDiagnosisPanel.add(patientComboBox);
 
@@ -116,7 +116,7 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
         for (Diseases disease : UtilityMethods.getDiseaseList()) {
             diseaseComboBox.addItem(disease.getName() + " - " + disease.getId());
         }
-        diseaseComboBox.setBounds(500, 200, 450, 40);
+        diseaseComboBox.setBounds(450, 200, 500, 40);
         diseaseComboBox.setFont(addPatientFont);
         addDiagnosisPanel.add(diseaseComboBox);
     }
@@ -254,7 +254,7 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
         mainInfoPanel.add(specialityLabel);
 
         patientLabel = new JLabel("Paciente:");
-        patientLabel.setBounds(300, 150, 300, 40);
+        patientLabel.setBounds(300, 125, 300, 40);
         patientLabel.setFont(addPatientFont);
         addDiagnosisPanel.add(patientLabel);
 
