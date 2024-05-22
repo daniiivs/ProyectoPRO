@@ -1,33 +1,26 @@
 package UI;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
-import javax.swing.JButton;
-
-public class WelcomePanel extends JPanel {
-
+public class WelcomePanel extends JPanel implements HospitalUI {
 	JLabel lblNewLabel = new JLabel("HOSPITAL");
-	JButton btnLogIn = new JButton("Log In");
-	JButton btnSignUp = new JButton("Sign Up");
-	
-	private static final long serialVersionUID = 1L;
-
+	JButton btnLogIn = new JButton("Iniciar sesión");
+	JButton btnSignUp = new JButton("Registrarse");
 
 	public WelcomePanel() {
 		setLayout(null);
-		
+
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(350, 156, 106, 14);
+		lblNewLabel.setFont(titleFont);
+		lblNewLabel.setBounds(0, 156, welcomeFrameWidth, 100);
 		add(lblNewLabel);
 		
-		btnLogIn.setBounds(187, 259, 89, 23);
+		btnLogIn.setBounds((welcomeFrameWidth / 2 - 75) - 85, 300, 150, 40);
+		btnLogIn.setFont(buttonFont);
 		add(btnLogIn);
 		
-		btnSignUp.setBounds(536, 259, 89, 23);
+		btnSignUp.setBounds((welcomeFrameWidth / 2 - 75) + 85, 300, 150, 40);
+		btnSignUp.setFont(buttonFont);
 		add(btnSignUp);
-
 	}
-
 }

@@ -184,4 +184,3 @@ public class UtilityMethods {
         database.deleteClosedDiagnosis(dniPatient, loggedUser.getDni(), database.getDiseaseIdByName(diseaseName), date);
     }
 }
-

@@ -3,6 +3,7 @@ package UI;
 import Entities.Doctors;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -43,13 +44,13 @@ public class LogInPanel extends JPanel {
 		add(logInButton);
 
 		backButton = new JButton("Back");
+		backButton.setBounds(375, 200, 89, 23);
 		backButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				resetInputs();
 			}
 		});
-		backButton.setBounds(375, 200, 89, 23);
 		add(backButton);
 	}
 

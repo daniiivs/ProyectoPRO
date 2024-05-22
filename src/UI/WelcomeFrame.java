@@ -6,10 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
 
-public class WelcomeFrame extends JFrame {
+public class WelcomeFrame extends JFrame implements HospitalUI {
 	public static WelcomeFrame welcomeFrame;
 
 	private JPanel cardPanel;
@@ -23,11 +22,14 @@ public class WelcomeFrame extends JFrame {
 	final static String SIGNUPPANEL = "Sign Up";
 
 	public WelcomeFrame() {
+		welcomeFrame = this;
+
+		editFrame();
+
 		welcomePanel = new WelcomePanel();
 		logInPanel = new LogInPanel();
 		signUpPanel = new SignUpPanel();
 
-		editFrame();
 		editPanel();
 		
 		//Add Panels on window
@@ -36,8 +38,6 @@ public class WelcomeFrame extends JFrame {
 		cardPanel.add(signUpPanel, SIGNUPPANEL);
 
 		editCardButtons();
-
-		welcomeFrame = this;
 	}
 
 	private void editCardButtons() {
@@ -70,16 +70,16 @@ public class WelcomeFrame extends JFrame {
 
 	private void editPanel() {
 		cardPanel = new JPanel();
-		cardPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(cardPanel);
+		add(cardPanel);
 		cardPanel.setLayout(new CardLayout(0, 0));
 	}
 
 	private void editFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(new Rectangle(1000, 600));
+		setBounds(new Rectangle(welcomeFrameWidth, welcomeFrameHeight));
 		this.setVisible(true);
+		this.setResizable(false);
 	}
 
 	public void closeFrame(){
@@ -90,4 +90,3 @@ public class WelcomeFrame extends JFrame {
 		new WelcomeFrame();
 	}
 }
-

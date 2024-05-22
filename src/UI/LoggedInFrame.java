@@ -248,7 +248,7 @@ public class LoggedInFrame extends JFrame {
     private void editPanels() {
         contentPane = new JTabbedPane();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
+        add(contentPane);
 
         mainInfoPanel = new JPanel();
         mainInfoPanel.setLayout(null);

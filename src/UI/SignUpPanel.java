@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SignUpPanel extends JPanel {
+public class SignUpPanel extends JPanel implements HospitalUI {
     private JLabel dniLabel;
     private JLabel passwordLabel;
     private JLabel confirmPasswordLabel;
@@ -34,8 +34,9 @@ public class SignUpPanel extends JPanel {
     }
 
     private void editButtons() {
-        signUpButton = new JButton("Sign Up");
-        signUpButton.setBounds(119, 450, 89, 23);
+        signUpButton = new JButton("Registrarme");
+        signUpButton.setBounds((welcomeFrameWidth / 2 - 75) - 85, 450, 150, 40);
+        signUpButton.setFont(buttonFont);
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,14 +63,15 @@ public class SignUpPanel extends JPanel {
         });
         add(signUpButton);
 
-        backButton = new JButton("Back");
+        backButton = new JButton("Atrás");
+        backButton.setBounds((welcomeFrameWidth / 2 - 75) + 85, 450, 150, 40);
+        backButton.setFont(buttonFont);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetInputs();
             }
         });
-        backButton.setBounds(375, 450, 89, 23);
         add(backButton);
     }
 
@@ -85,68 +87,82 @@ public class SignUpPanel extends JPanel {
 
     private void editInputs() {
         dniField = new JTextField();
-        dniField.setBounds(316, 50, 200, 20);
+        dniField.setBounds(330, 50, 200, 30);
         add(dniField);
+        dniField.setFont(labelInputFont);
         dniField.setColumns(10);
 
         passwordField = new JPasswordField();
-        passwordField.setBounds(316, 100, 200, 20);
+        passwordField.setBounds(330, 100, 200, 30);
+        passwordField.setFont(labelInputFont);
         add(passwordField);
 
         confirmPasswordField = new JPasswordField();
-        confirmPasswordField.setBounds(316, 150, 200, 20);
+        confirmPasswordField.setBounds(330, 150, 200, 30);
+        confirmPasswordField.setFont(labelInputFont);
         add(confirmPasswordField);
 
         nameField = new JTextField();
         nameField.setColumns(10);
-        nameField.setBounds(316, 200, 200, 20);
+        nameField.setBounds(330, 200, 200, 30);
+        nameField.setFont(labelInputFont);
         add(nameField);
 
         firstLastNameField = new JTextField();
         firstLastNameField.setColumns(10);
-        firstLastNameField.setBounds(316, 250, 200, 20);
+        firstLastNameField.setBounds(330, 250, 200, 30);
+        firstLastNameField.setFont(labelInputFont);
         add(firstLastNameField);
 
         secondLastNameField = new JTextField();
         secondLastNameField.setColumns(10);
-        secondLastNameField.setBounds(316, 300, 200, 20);
+        secondLastNameField.setBounds(330, 300, 200, 30);
+        secondLastNameField.setFont(labelInputFont);
         add(secondLastNameField);
 
         specialityComboBox = new JComboBox();
         for (Speciality speciality : UtilityMethods.getSpecialityList()) {
             specialityComboBox.addItem(speciality.getId() + " - " + speciality.getName());
         }
-        specialityComboBox.setBounds(316, 350, 200, 20);
+        specialityComboBox.setBounds(330, 350, 200, 30);
+        specialityComboBox.setFont(labelInputFont);
         add(specialityComboBox);
     }
 
     private void editLabels() {
         dniLabel = new JLabel("DNI:");
-        dniLabel.setBounds(145, 50, 161, 20);
+        dniLabel.setBounds(150, 50, 150, 30);
+        dniLabel.setFont(labelInputFont);
         add(dniLabel);
 
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(145, 100, 161, 20);
+        passwordLabel = new JLabel("Contraseña:");
+        passwordLabel.setBounds(150, 100, 150, 30);
+        passwordLabel.setFont(labelInputFont);
         add(passwordLabel);
 
-        confirmPasswordLabel = new JLabel("Confirm Password:");
-        confirmPasswordLabel.setBounds(145, 150, 161, 20);
+        confirmPasswordLabel = new JLabel("Confirmar contraseña:");
+        confirmPasswordLabel.setBounds(150, 150, 150, 30);
+        confirmPasswordLabel.setFont(labelInputFont);
         add(confirmPasswordLabel);
 
-        nameLabel = new JLabel("Name:");
-        nameLabel.setBounds(145, 200, 161, 20);
+        nameLabel = new JLabel("Nombre:");
+        nameLabel.setBounds(150, 200, 150, 30);
+        nameLabel.setFont(labelInputFont);
         add(nameLabel);
 
-        firstLastNameLabel = new JLabel("First Last Name:");
-        firstLastNameLabel.setBounds(145, 250, 161, 20);
+        firstLastNameLabel = new JLabel("Primer apellido:");
+        firstLastNameLabel.setBounds(150, 250, 150, 30);
+        firstLastNameLabel.setFont(labelInputFont);
         add(firstLastNameLabel);
 
-        secondLastNameLabel = new JLabel("Second Last Name:");
-        secondLastNameLabel.setBounds(145, 300, 161, 20);
+        secondLastNameLabel = new JLabel("Segundo apellido:");
+        secondLastNameLabel.setBounds(150, 300, 150, 30);
+        secondLastNameLabel.setFont(labelInputFont);
         add(secondLastNameLabel);
 
-        specialityLabel = new JLabel("Speciality:");
-        specialityLabel.setBounds(145, 350, 161, 20);
+        specialityLabel = new JLabel("Especialidad:");
+        specialityLabel.setBounds(150, 350, 150, 30);
+        specialityLabel.setFont(labelInputFont);
         add(specialityLabel);
     }
 }
