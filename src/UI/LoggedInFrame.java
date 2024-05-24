@@ -72,11 +72,11 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
             public void actionPerformed(ActionEvent e) {
                 Diagnosis diagnosis = new Diagnosis(UtilityMethods.splitPatient(String.valueOf(patientComboBox.getSelectedItem())), loggedUser, UtilityMethods.splitDisease(String.valueOf(diseaseComboBox.getSelectedItem())));
                 if (UtilityMethods.diagnosisExists(diagnosis)) {
-                    JOptionPane.showMessageDialog(null, "Ya existe un diagnóstico con los mismos datos", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(loggedInFrame, "Ya existe un diagnóstico con los mismos datos", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     UtilityMethods.addNewDiagnosis(diagnosis);
                     updateTableModels();
-                    JOptionPane.showMessageDialog(null, "Se ha añadido el nuevo caso", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(loggedInFrame, "Se ha añadido el nuevo caso", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -88,7 +88,7 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (JOptionPane.showConfirmDialog(null, "¿Seguro que quieres salir?", "exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(loggedInFrame, "¿Seguro que quieres salir?", "exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     loggedInFrame.dispose();
                     loggedUser = null;
                     new WelcomeFrame();
@@ -173,11 +173,11 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
                 if (e.getClickCount() == 2) {
                     JTable clickedTable = (JTable) e.getSource();
                     int row = clickedTable.getSelectedRow();
-                    if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar el caso seleccionado?", "option", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if (JOptionPane.showConfirmDialog(loggedInFrame, "¿Desea eliminar el caso seleccionado?", "option", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         String[] diagnosisInfo = getDiagnosisInfo(row, clickedTable);
                         UtilityMethods.deleteDiagnosis(loggedUser, diagnosisInfo[0], diagnosisInfo[1], diagnosisInfo[2]);
                         updateTableModels();
-                        JOptionPane.showMessageDialog(null, "El caso se ha eliminado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(loggedInFrame, "El caso se ha eliminado", "Exito", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
@@ -210,11 +210,11 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
                 if (e.getClickCount() == 2) {
                     JTable clickedTable = (JTable) e.getSource();
                     int row = clickedTable.getSelectedRow();
-                    if (JOptionPane.showConfirmDialog(null, "¿Desea dar el alta al caso seleccionado?", "option", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if (JOptionPane.showConfirmDialog(loggedInFrame, "¿Desea dar el alta al caso seleccionado?", "option", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         String[] diagnosisInfo = getDiagnosisInfo(row, clickedTable);
                         UtilityMethods.closeDiagnosis(loggedUser, diagnosisInfo[0], diagnosisInfo[1], diagnosisInfo[2]);
                         updateTableModels();
-                        JOptionPane.showMessageDialog(null, "El caso se ha cerrado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(loggedInFrame, "El caso se ha cerrado", "Exito", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }

@@ -42,22 +42,22 @@ public class SignUpPanel extends JPanel implements HospitalUI {
             public void actionPerformed(ActionEvent e) {
                 if (!UtilityMethods.checkDni(dniField.getText().toUpperCase())) {
                     dniField.setText("");
-                    JOptionPane.showMessageDialog(null, "Please type a valid DNI", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "Please type a valid DNI", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (String.valueOf(passwordField.getPassword()).isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please type a password", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "Please type a password", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (!UtilityMethods.checkMatch(String.valueOf(passwordField.getPassword()), String.valueOf(confirmPasswordField.getPassword()))) {
                     passwordField.setText("");
                     confirmPasswordField.setText("");
-                    JOptionPane.showMessageDialog(null, "Passwords don't match", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "Passwords don't match", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (nameField.getText().isEmpty() || firstLastNameField.getText().isEmpty() || secondLastNameField.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please type your personal information", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "Please type your personal information", "Error", JOptionPane.ERROR_MESSAGE);
                 } else if (UtilityMethods.dniIsRegistered(dniField.getText().toUpperCase())) {
                     dniField.setText("");
-                    JOptionPane.showMessageDialog(null, "The DNI you typed is already registered. Please type a different one", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "The DNI you typed is already registered. Please type a different one", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     UtilityMethods.addNewDoctor(dniField.getText().toUpperCase(), nameField.getText().toUpperCase(), String.valueOf(passwordField.getPassword()), firstLastNameField.getText().toUpperCase(), secondLastNameField.getText().toUpperCase(), UtilityMethods.splitSpeciality(String.valueOf(specialityComboBox.getSelectedItem())));
                     resetInputs();
-                    JOptionPane.showMessageDialog(null, "You've been registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "You've been registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

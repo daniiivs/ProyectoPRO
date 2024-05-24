@@ -33,10 +33,10 @@ public class LogInPanel extends JPanel implements HospitalUI {
 			public void actionPerformed(ActionEvent e) {
 				if (!UtilityMethods.dniIsRegistered(dniField.getText().toUpperCase())) {
 					dniField.setText("");
-					JOptionPane.showMessageDialog(null, "The DNI you typed is not registered", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "The DNI you typed is not registered", "Error", JOptionPane.ERROR_MESSAGE);
 				} else if (!UtilityMethods.passwordNotMatching(String.valueOf(passwordField.getPassword()), dniField.getText().toUpperCase())) {
 					passwordField.setText("");
-					JOptionPane.showMessageDialog(null, "Incorrect password. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "Incorrect password. Please try again", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					UtilityMethods.logIn(dniField.getText().toUpperCase());
 				}
@@ -74,7 +74,8 @@ public class LogInPanel extends JPanel implements HospitalUI {
 	}
 
 	private void editLabels() {
-		dniLabel = new JLabel("DNI:");
+		ImageIcon icon = new ImageIcon("src/Icons/user.png");
+		dniLabel = new JLabel("DNI:", icon, SwingConstants.LEFT);
 		dniLabel.setBounds(160, 150, 200, 30);
 		dniLabel.setFont(labelInputFont);
 		add(dniLabel);
