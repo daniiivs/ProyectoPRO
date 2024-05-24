@@ -74,13 +74,12 @@ public class LogInPanel extends JPanel implements HospitalUI {
 	}
 
 	private void editLabels() {
-		ImageIcon icon = new ImageIcon("src/Icons/user.png");
-		dniLabel = new JLabel("DNI:", icon, SwingConstants.LEFT);
+		dniLabel = new JLabel("DNI:", userIcon, SwingConstants.LEFT);
 		dniLabel.setBounds(160, 150, 200, 30);
 		dniLabel.setFont(labelInputFont);
 		add(dniLabel);
 
-		passwordLabel = new JLabel("Contraseña:");
+		passwordLabel = new JLabel("Contraseña:", keyIcon, SwingConstants.LEFT);
 		passwordLabel.setBounds(160, 200, 200, 30);
 		passwordLabel.setFont(labelInputFont);
 		add(passwordLabel);

@@ -108,7 +108,7 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
         for (Patients patient : UtilityMethods.getPatientsList()) {
             patientComboBox.addItem(patient.getFirstLastName() + " " + patient.getSecondLastName() + ", " + patient.getName() + " - " + patient.getDni());
         }
-        patientComboBox.setBounds(450, 125, 500, 40);
+        patientComboBox.setBounds(475, 125, 450, 40);
         patientComboBox.setFont(addPatientFont);
         addDiagnosisPanel.add(patientComboBox);
 
@@ -116,17 +116,17 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
         for (Diseases disease : UtilityMethods.getDiseaseList()) {
             diseaseComboBox.addItem(disease.getName() + " - " + disease.getId());
         }
-        diseaseComboBox.setBounds(450, 200, 500, 40);
+        diseaseComboBox.setBounds(475, 200, 450, 40);
         diseaseComboBox.setFont(addPatientFont);
         addDiagnosisPanel.add(diseaseComboBox);
     }
 
     private void addTabbedPanels() {
-        contentPane.addTab("Mi información", null, mainInfoPanel, null);
-        contentPane.addTab("Mis casos activos", null, activeDiagnosisPanel, null);
-        contentPane.addTab("Mis altas", null, closedDiagnosisPanel, null);
-        contentPane.addTab("Añadir caso", null, addDiagnosisPanel, null);
-        contentPane.addTab("Todos los pacientes", null, allPatientsPanel, null);
+        contentPane.addTab("Mi información", myInfoIcon, mainInfoPanel, null);
+        contentPane.addTab("Mis casos activos", activeCasesIcon, activeDiagnosisPanel, null);
+        contentPane.addTab("Mis altas", closedCasesIcon, closedDiagnosisPanel, null);
+        contentPane.addTab("Añadir caso", newCaseIcon, addDiagnosisPanel, null);
+        contentPane.addTab("Todos los pacientes", allPatientsIcon, allPatientsPanel, null);
         contentPane.setFont(tabFont);
     }
 
@@ -238,7 +238,7 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
     }
 
     private void editLabels() {
-        nameLabel = new JLabel(loggedUser.getName() + " " + loggedUser.getFirstLastName() + " " + loggedUser.getSecondLastName());
+        nameLabel = new JLabel(loggedUser.getName() + " " + loggedUser.getFirstLastName() + " " + loggedUser.getSecondLastName(), doctorIcon, SwingConstants.LEFT);
         nameLabel.setBounds(100, 50, 1200, 70);
         nameLabel.setFont(nameFont);
         mainInfoPanel.add(nameLabel);
@@ -253,12 +253,12 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
         specialityLabel.setFont(informationFont);
         mainInfoPanel.add(specialityLabel);
 
-        patientLabel = new JLabel("Paciente:");
+        patientLabel = new JLabel("Paciente:", userIcon, SwingConstants.LEFT);
         patientLabel.setBounds(300, 125, 300, 40);
         patientLabel.setFont(addPatientFont);
         addDiagnosisPanel.add(patientLabel);
 
-        diseaseLabel = new JLabel("Enfermedad:");
+        diseaseLabel = new JLabel("Enfermedad:", diseaseIcon, SwingConstants.LEFT);
         diseaseLabel.setBounds(300, 200, 300, 40);
         diseaseLabel.setFont(addPatientFont);
         addDiagnosisPanel.add(diseaseLabel);
