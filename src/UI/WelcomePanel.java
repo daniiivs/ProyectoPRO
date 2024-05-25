@@ -10,6 +10,7 @@ public class WelcomePanel extends JPanel implements HospitalUI {
 
 	public WelcomePanel() {
 		setLayout(null);
+		setBackground(Color.white);
 
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(titleFont);

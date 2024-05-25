@@ -110,6 +110,7 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
         }
         patientComboBox.setBounds(475, 125, 450, 40);
         patientComboBox.setFont(addPatientFont);
+        patientComboBox.setFont(labelInputFont);
         addDiagnosisPanel.add(patientComboBox);
 
         diseaseComboBox = new JComboBox();
@@ -118,6 +119,7 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
         }
         diseaseComboBox.setBounds(475, 200, 450, 40);
         diseaseComboBox.setFont(addPatientFont);
+        diseaseComboBox.setFont(labelInputFont);
         addDiagnosisPanel.add(diseaseComboBox);
     }
 

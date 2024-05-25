@@ -34,7 +34,7 @@ public class Database {
         }
     }
 
-    private String getInfoFromFile(String field, File file) {
+    public String getInfoFromFile(String field, File file) {
         String line;
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -52,6 +52,15 @@ public class Database {
             throw new RuntimeException(e);
         }
         return "";
+    }
+
+    public void generalInsert(String insertQuery) {
+        try {
+            Statement statement = this.connection.createStatement();
+            statement.executeUpdate(insertQuery);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String selectPassword(String dni) {

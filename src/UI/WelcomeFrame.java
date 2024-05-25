@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import java.io.File;
+import java.sql.SQLException;
 
 public class WelcomeFrame extends JFrame implements HospitalUI {
 	public static WelcomeFrame welcomeFrame;
@@ -18,8 +20,8 @@ public class WelcomeFrame extends JFrame implements HospitalUI {
 
 	//Identifiers
 	final static String WELCOMEPANEL = "Hospital";
-	final static String LOGINPANEL = "Log In";
-	final static String SIGNUPPANEL = "Sign Up";
+	final static String LOGINPANEL = "Iniciar sesión";
+	final static String SIGNUPPANEL = "Registrarse";
 
 	public WelcomeFrame() {
 		welcomeFrame = this;
@@ -89,5 +91,6 @@ public class WelcomeFrame extends JFrame implements HospitalUI {
 
 	public static void main(String[] args) {
 		new WelcomeFrame();
-	}
+		UtilityMethods.checkDiseases();
+    }
 }

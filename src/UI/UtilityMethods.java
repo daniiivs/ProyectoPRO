@@ -3,12 +3,42 @@ package UI;
 import DatabaseConnection.Database;
 import Entities.*;
 
+import javax.swing.*;
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UtilityMethods {
-    static Database database = new Database();
+    static final Database database = new Database();
+
+    public static void checkDiseases(){
+        try {
+            if (!database.selectDiseases().next()) {
+                JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "Vaya, parece que las enfermedades no se encuentran registradas en la base de datos...");
+                database.generalInsert(readFile(new File("src/DatabaseConnection/Diseases.txt")));
+                JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "Se han añadido todas las enfermedades");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String readFile(File file) {
+        StringBuilder content = new StringBuilder();
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            while ((line = br.readLine()) != null) {
+                content.append(line).append(" ");
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return content.toString();
+    }
 
     public static boolean checkDni(String dni) {
         String check = "TRWAGMYFPDXBNJZSQVHLCKE";
