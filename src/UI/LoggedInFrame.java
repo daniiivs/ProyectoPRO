@@ -210,7 +210,7 @@ public class LoggedInFrame extends JFrame implements HospitalUI {
                     if (JOptionPane.showConfirmDialog(loggedInFrame, "¿Desea eliminar el caso seleccionado?", "option", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         String[] diagnosisInfo = getDiagnosisInfo(row, clickedTable); // Gets the information from the row
                         UtilityMethods.deleteDiagnosis(loggedUser, diagnosisInfo[0], diagnosisInfo[1], diagnosisInfo[2]);
-                        updateTableModels(); // Updates the table
+                        updateTableModels(); // Updates the tables
                         JOptionPane.showMessageDialog(loggedInFrame, "El caso se ha eliminado", "Exito", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
