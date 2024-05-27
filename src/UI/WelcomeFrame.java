@@ -7,47 +7,42 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
-import java.io.File;
-import java.sql.SQLException;
 
+/**
+ * Class for launching the app. It shows the first frame, which lets the user sign up and log in
+ */
 public class WelcomeFrame extends JFrame implements HospitalUI {
-	public static WelcomeFrame welcomeFrame;
+	public static WelcomeFrame welcomeFrame; // Variable for the frame that gets opened once the app launches, so that every class can access it
 
-	private JPanel cardPanel;
+	// Panels
+	private JPanel cardPanel; // Main panel that contains the other three
 	private WelcomePanel welcomePanel;
 	private LogInPanel logInPanel;
 	private SignUpPanel signUpPanel;
 
-	//Identifiers
+	// Identifiers for each panel
 	final static String WELCOMEPANEL = "Hospital";
 	final static String LOGINPANEL = "Iniciar sesión";
 	final static String SIGNUPPANEL = "Registrarse";
 
+	// Constructor for the WelcomeFrame
 	public WelcomeFrame() {
 		welcomeFrame = this;
 
 		editFrame();
-
-		welcomePanel = new WelcomePanel();
-		logInPanel = new LogInPanel();
-		signUpPanel = new SignUpPanel();
-
 		editPanel();
-		
-		//Add Panels on window
-		cardPanel.add(welcomePanel, WELCOMEPANEL);
-		cardPanel.add(logInPanel, LOGINPANEL);
-		cardPanel.add(signUpPanel, SIGNUPPANEL);
-
 		editCardButtons();
 	}
 
+	/**
+	 * Method for adding the different action listeners to the buttons
+	 */
 	private void editCardButtons() {
 		welcomePanel.btnLogIn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CardLayout layout = (CardLayout) cardPanel.getLayout();
-				layout.show(cardPanel, LOGINPANEL);
+				CardLayout layout = (CardLayout) cardPanel.getLayout(); // Gets the layout of the main panel
+				layout.show(cardPanel, LOGINPANEL); // Changes it to the specified panel
 			}
 		});
 
@@ -70,13 +65,27 @@ public class WelcomeFrame extends JFrame implements HospitalUI {
 		signUpPanel.backButton.addActionListener(goBack);
 	}
 
+	/**
+	 * Method for setting up the different panels
+	 */
 	private void editPanel() {
-		cardPanel = new JPanel();
+		welcomePanel = new WelcomePanel();
+		logInPanel = new LogInPanel();
+		signUpPanel = new SignUpPanel();
 
+		cardPanel = new JPanel();
 		add(cardPanel);
 		cardPanel.setLayout(new CardLayout(0, 0));
+
+		//Add Panels on window
+		cardPanel.add(welcomePanel, WELCOMEPANEL);
+		cardPanel.add(logInPanel, LOGINPANEL);
+		cardPanel.add(signUpPanel, SIGNUPPANEL);
 	}
 
+	/**
+	 * Method for setting up the frame
+	 */
 	private void editFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(new Rectangle(welcomeFrameWidth, welcomeFrameHeight));
@@ -85,12 +94,19 @@ public class WelcomeFrame extends JFrame implements HospitalUI {
 		this.setResizable(false);
 	}
 
+	/**
+	 * Method to close de frame
+	 */
 	public void closeFrame(){
 		this.dispose();
 	}
 
+	/**
+	 * Launcher
+	 * @param args none
+	 */
 	public static void main(String[] args) {
 		new WelcomeFrame();
-		UtilityMethods.checkDiseases();
+		UtilityMethods.checkDiseases(); // Checks if there are any diseases registered in the database
     }
 }

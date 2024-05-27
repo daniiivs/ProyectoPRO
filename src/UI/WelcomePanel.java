@@ -3,11 +3,17 @@ package UI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class that creates the welcome panel
+ */
 public class WelcomePanel extends JPanel implements HospitalUI {
 	JLabel lblNewLabel = new JLabel("VITALCLINIC", hospitalIcon, JLabel.CENTER);
 	JButton btnLogIn = new JButton("Iniciar sesión");
 	JButton btnSignUp = new JButton("Registrarse");
 
+	/**
+	 * Constructor for WelcomePanel
+	 */
 	public WelcomePanel() {
 		setLayout(null);
 		setBackground(Color.white);

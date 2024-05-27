@@ -3,6 +3,9 @@ package UI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Interface HospitalUI that contains different variables for setting the appearance of the UI, such as fonts and icons
+ */
 public interface HospitalUI {
     int welcomeFrameWidth = 700;
     int welcomeFrameHeight = 600;

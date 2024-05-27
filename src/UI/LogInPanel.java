@@ -1,12 +1,12 @@
 package UI;
 
-import Entities.Doctors;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Class that creates the log in panel
+ */
 public class LogInPanel extends JPanel implements HospitalUI {
 	private JLabel dniLabel;
 	private JLabel passwordLabel;
@@ -17,6 +17,9 @@ public class LogInPanel extends JPanel implements HospitalUI {
 	private JButton logInButton;
 	protected JButton backButton;
 
+	/**
+	 * Constructor for LogInPanel
+	 */
 	public LogInPanel() {
 		setLayout(null);
 		editLabels();
@@ -24,6 +27,9 @@ public class LogInPanel extends JPanel implements HospitalUI {
 		editButtons();
 	}
 
+	/**
+	 * Method for editing all buttons' properties, and adding action listeners
+	 */
 	private void editButtons() {
 		logInButton = new JButton("Iniciar sesión");
 		logInButton.setBounds((welcomeFrameWidth / 2 - 75) - 85, 300, 150, 40);
@@ -31,13 +37,13 @@ public class LogInPanel extends JPanel implements HospitalUI {
 		logInButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!UtilityMethods.dniIsRegistered(dniField.getText().toUpperCase())) {
+				if (!UtilityMethods.dniIsRegistered(dniField.getText().toUpperCase())) { // Checks if the DNI is registered
 					dniField.setText("");
 					JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "El DNI que ha introducido no se encuentra registrado", "Error", JOptionPane.ERROR_MESSAGE);
-				} else if (!UtilityMethods.passwordNotMatching(String.valueOf(passwordField.getPassword()), dniField.getText().toUpperCase())) {
+				} else if (!UtilityMethods.passwordMatching(String.valueOf(passwordField.getPassword()), dniField.getText().toUpperCase())) { // Checks if password matches the one in the database
 					passwordField.setText("");
 					JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "Contraseña incorrecta, por favor inténtelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
+				} else { // Calls logIn() to open new window
 					UtilityMethods.logIn(dniField.getText().toUpperCase());
 				}
 			}
@@ -56,11 +62,17 @@ public class LogInPanel extends JPanel implements HospitalUI {
 		add(backButton);
 	}
 
+	/**
+	 * Method for clearing all inputs
+	 */
 	private void resetInputs() {
 		dniField.setText("");
 		passwordField.setText("");
 	}
 
+	/**
+	 * Method for editing all inputs
+	 */
 	private void editInputs() {
 		dniField = new JTextField();
 		dniField.setBounds(300, 150, 250, 30);
@@ -73,6 +85,9 @@ public class LogInPanel extends JPanel implements HospitalUI {
 		add(passwordField);
 	}
 
+	/**
+	 * Method for editing all labels
+	 */
 	private void editLabels() {
 		dniLabel = new JLabel("DNI:", userIcon, SwingConstants.LEFT);
 		dniLabel.setBounds(160, 150, 200, 30);
