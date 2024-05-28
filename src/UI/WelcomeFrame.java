@@ -4,9 +4,12 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.CardLayout;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Class for launching the app. It shows the first frame, which lets the user sign up and log in
@@ -102,11 +105,35 @@ public class WelcomeFrame extends JFrame implements HospitalUI {
 	}
 
 	/**
-	 * Launcher
+	 * Launcher for the app
 	 * @param args none
 	 */
 	public static void main(String[] args) {
+		getConnectionInfo();
 		new WelcomeFrame();
 		UtilityMethods.checkDiseases(); // Checks if there are any diseases registered in the database
     }
+
+	/**
+	 * Method that checks if the file that contains the information to connect to the database exists. If it doesn't, it generates it
+	 */
+	private static void getConnectionInfo() {
+		File databaseInfo = new File("./src/DatabaseConnection/DatabaseInfo.txt");
+		if (!databaseInfo.exists()) {
+			try {
+				if (databaseInfo.createNewFile()){
+					BufferedWriter bw = new BufferedWriter(new FileWriter(databaseInfo, true));
+					bw.write("ip$localhost\n");
+					bw.write("port$3306\n");
+					bw.write("db$hospitalPRO\n");
+					bw.write("user$root\n");
+					bw.write("password$none");
+					bw.flush();
+					bw.close();
+				}
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
 }
