@@ -14,11 +14,11 @@ import java.sql.*;
 public class Database {
     private File connectionFile;
 
-    private String ip;
-    private String port;
-    private String database;
-    private String user;
-    private String password;
+    private final String IP;
+    private final String PORT;
+    private final String DATABASE;
+    private final String USER;
+    private final String PASSWORD;
     private Connection connection;
 
     /**
@@ -26,11 +26,11 @@ public class Database {
      */
     public Database() {
         connectionFile = new File("src/DatabaseConnection/DatabaseInfo.txt");
-        this.ip = getInfoFromFile("ip", connectionFile);
-        this.port = getInfoFromFile("port", connectionFile);
-        this.database = getInfoFromFile("db", connectionFile);
-        this.user = getInfoFromFile("user", connectionFile);
-        this.password = getInfoFromFile("password", connectionFile);
+        this.IP = getInfoFromFile("ip", connectionFile);
+        this.PORT = getInfoFromFile("port", connectionFile);
+        this.DATABASE = getInfoFromFile("db", connectionFile);
+        this.USER = getInfoFromFile("user", connectionFile);
+        this.PASSWORD = getInfoFromFile("password", connectionFile);
 
         connectToDatabase();
     }
@@ -41,7 +41,7 @@ public class Database {
     private void connectToDatabase() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + database, user, password);
+            this.connection = DriverManager.getConnection("jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(WelcomeFrame.welcomeFrame, "No se encuentra la clase en cuestión", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException e) {
